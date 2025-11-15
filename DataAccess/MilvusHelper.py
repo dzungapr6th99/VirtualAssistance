@@ -1,7 +1,7 @@
 import sys
 from Entities.CommonLib.ConfigData import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION, METRIC_TYPE
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
-from Logging import Logger
+from logging import Logger
 
 
 class MilvusHelper:
