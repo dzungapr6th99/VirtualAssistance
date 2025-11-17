@@ -2,7 +2,7 @@ from typing import List, Tuple
 import re
 
 
-def parser_markdown_with_sections(md_text: str) -> List[Tuple[str, str]]:
+def parse_markdown_with_sections(md_text: str) -> List[Tuple[str, str]]:
     """
     Return to list (section_title, text_block)
     """
