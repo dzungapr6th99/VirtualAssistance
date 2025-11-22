@@ -1,6 +1,6 @@
 from typing import List
 import httpx
-from RagService.config.config_app import Settings
+from app.config.config_app import Settings
 
 async def get_embeddings (texts: List[str])-> List[List[float]]:
     """

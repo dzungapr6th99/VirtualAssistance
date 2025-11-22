@@ -2,12 +2,12 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from uuid import uuid4
 from typing import List
 
-from RagService.models.chunk import ChunkRecord, UpdloadResponse
-from RagService.services.chunker import chunk_text
-from RagService.services.embedding_service import get_embeddings
-from RagService.services.milvus_client import insert_chunks
-from RagService.services.neo4j_client import write_graph
-from RagService.services.markdown_parser import parse_markdown_with_sections
+from app.models.chunk import ChunkRecord, UpdloadResponse
+from app.services.chunker import chunk_text
+from app.services.embedding_service import get_embeddings
+from app.services.milvus_client import insert_chunks
+from app.services.neo4j_client import write_graph
+from app.services.markdown_parser import parse_markdown_with_sections
 
 router = APIRouter(prefix="/api/documents", tags= ["documents"])
 
@@ -65,4 +65,5 @@ async def upload_markdown(
         file_name= file_name,
         chunk_count= len(chunk_records)
     )
+
 

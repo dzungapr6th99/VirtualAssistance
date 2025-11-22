@@ -1,7 +1,7 @@
 from pymilvus import connections, Collection, MilvusClient
 from typing import List
-from RagService.config.config_app import Settings
-from RagService.models.chunk import ChunkRecord
+from app.config.config_app import Settings
+from app.models.chunk import ChunkRecord
 
 connections.connect(
     alias= "default",

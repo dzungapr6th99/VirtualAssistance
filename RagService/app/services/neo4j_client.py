@@ -1,7 +1,7 @@
 from typing import List
 from neo4j import GraphDatabase
-from RagService.config.config_app import Settings
-from RagService.models.chunk import ChunkRecord
+from app.config.config_app import Settings
+from app.models.chunk import ChunkRecord
 
 _driver = GraphDatabase.driver(
     Settings.neo4j_uri,
