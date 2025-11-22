@@ -1,11 +1,11 @@
 from typing import List
 from neo4j import GraphDatabase
-from app.config.config_app import Settings
+from app.config.config_app import settings
 from app.models.chunk import ChunkRecord
 
 _driver = GraphDatabase.driver(
-    Settings.neo4j_uri,
-    auth= (Settings.neo4j_user, Settings.neo4j_password)
+    settings.neo4j_uri,
+    auth= (settings.neo4j_user, settings.neo4j_password)
 )
 
 def write_graph(project_id: str, file_name: str, doc_id: str, chunks: List[ChunkRecord])-> None:

@@ -1,19 +1,20 @@
 from pymilvus import connections, Collection, MilvusClient
 from typing import List
-from app.config.config_app import Settings
+from app.config.config_app import settings
 from app.models.chunk import ChunkRecord
+
 
 connections.connect(
     alias= "default",
     user= "",
     password= "",
-    db_name= Settings.milvus_db_name,
-    host = Settings.milvus_host,
-    port = Settings.milvus_port
+    db_name= settings.milvus_db_name,
+    host = settings.milvus_host,
+    port = settings.milvus_port
 )
+#_client = MilvusClient(uri= f"{Settings.milvus_host}:{Settings.milvus_port}")
 
-
-_collection = Collection(Settings.milvus_collection)
+_collection = Collection(settings.milvus_collection)
 
 def insert_chunks(chunks: List[ChunkRecord], embeddings: List[List[float]])-> None:
     chunk_ids = [c.chunk_id for c in chunks]
