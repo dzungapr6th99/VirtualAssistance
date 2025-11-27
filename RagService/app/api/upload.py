@@ -1,7 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from uuid import uuid4
 from typing import List
-
 from app.models.chunk import ChunkRecord, UpdloadResponse
 from app.services.chunker import chunk_text
 from app.services.embedding_service import get_embeddings
@@ -55,7 +54,7 @@ async def upload_markdown(
     embeddings = await get_embeddings(texts_for_embedding)
     if len(embeddings) != len (chunk_records):
         raise HTTPException(status_code=500, detail="Embedding length mismatch")
-    
+
     insert_chunks(chunk_records, embeddings= embeddings)
     write_graph (project_id= project_id, doc_id= doc_id, file_name=file_name, chunks= chunk_records)
 

@@ -36,5 +36,7 @@ class Settings(BaseSettings):
     embedding_api_base: str = "http://127.0.0.1:2010"
     embedding_api_path: str = "/embeddings"
 
-
+    ############### Ollama ######################
+    ollama_embedding_model:str = "nomic-embed-text"
+    embedding_dim:int = 768
 settings = Settings()  
