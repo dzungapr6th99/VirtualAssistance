@@ -10,7 +10,7 @@ async def get_embeddings (texts: List[str])-> List[List[float]]:
     Example: {"texts": ["...", "..."]}
 
     """
-    model = settings.app_name
+    model = settings.ollama_embedding_model
     vectors = []
     for t in texts:
         resp = ollama.embeddings(model= model, prompt= t)

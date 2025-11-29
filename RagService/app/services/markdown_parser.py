@@ -18,7 +18,7 @@ def parse_markdown_with_sections(md_text: str) -> List[Tuple[str, str]]:
             buffer = []
         
     for line in lines:
-        if re.match(r"^#{1,6}\s"):
+        if re.match(r"^#{1,6}\s", line):
             flush()
             current_title = line.lstrip("#").strip()
         else:

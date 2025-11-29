@@ -15,7 +15,7 @@ async def upload_markdown(
     file: UploadFile = File(...),
     project_id: str = Form("default")
 ):
-    if not file.filename.endswith(".md") and file.filename.endswith(".txt"):
+    if not (file.filename.endswith(".md") or file.filename.endswith(".txt")):
         raise HTTPException(status_code=400, detail = "File must be .md or .txt")
     
     content_bytes = await file.read()
