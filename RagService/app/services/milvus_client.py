@@ -67,7 +67,7 @@ def insert_chunks(chunks: List[ChunkRecord], embeddings: List[List[float]])-> No
     chunk_ids = [c.chunk_id for c in chunks]
     project_ids = [c.project_id for c in chunks]
     doc_ids = [c.doc_id  for c in chunks]
-    sections = [c.section for c in chunks]
+    sections = [c.section_title for c in chunks]
     contents = [c.content for c in chunks]
     _collection.insert([
         chunk_ids,

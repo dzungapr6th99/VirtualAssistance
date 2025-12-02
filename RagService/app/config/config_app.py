@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     ############### Neo4j Configuration ###############
     neo4j_uri: str = "bolt://localhost:7687"
     neo4j_user: str = "neo4j"
-    neo4j_password: str = "123456"
+    neo4j_password: str = "12345678"
 
     ############### Api Url ###################
     embedding_api_base: str = "http://127.0.0.1:2010"
