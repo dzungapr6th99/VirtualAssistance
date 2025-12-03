@@ -27,7 +27,7 @@ class OllamaChatResponse(BaseModel):
     load_duration: int=0
     prompt_eval_duration: int = 0
     eval_count: int = 0
-
+    eval_duration:int=0
     @staticmethod
     def now_iso()-> str:
         return datetime.now(timezone.utc).isoformat
