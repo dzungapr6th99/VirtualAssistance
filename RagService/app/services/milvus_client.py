@@ -1,5 +1,5 @@
 from pymilvus import connections, Collection, MilvusClient, FieldSchema, CollectionSchema, DataType, utility
-from typing import List
+from typing import List, Dict, Any, Optional
 from app.config.config_app import settings
 from app.models.chunk import ChunkRecord
 
@@ -78,3 +78,38 @@ def insert_chunks(chunks: List[ChunkRecord], embeddings: List[List[float]])-> No
         embeddings
     ])
 
+def search_relevant_chunks(
+        project_id: Optional[str],
+        embedding: List[float],
+        top_k: int=5
+) -> List[Dict[str, Any]]:
+    """Search milvus by vector"""
+    search_params = {
+        "metric_type": "COSINE",
+        "params":{"nprobe": 10}
+    }
+
+    expr = ""
+    if (project_id):
+        expr = f'project_id == "{project_id}"'
+    results = _collection.search(
+        data = [embedding],
+        anns_field= "embedding",
+        param= search_params,
+        limit = top_k,
+        expr= expr if expr else None,
+        output_fields= ["chunk_id", "project_id", "doc_id", "section_title", "content"]
+    )
+
+    hits: List[Dict[Any, str]] = []
+
+    for hit in results[0]:
+        entity = hit.entity
+        hits.append({
+            "chunk_id": entity.get("chunk_id"),
+            "doc_id": entity.get("doc_id"),
+            "section_title": entity.get("section_title"),
+            "content": entity.get("content"),
+            "score": float(hit.distance),
+        })
+    return hits

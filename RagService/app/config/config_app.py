@@ -28,10 +28,10 @@ class Settings(BaseSettings):
     milvus_collection: str = "robot_document"
 
     ############### Neo4j Configuration ###############
-    neo4j_uri: str = "bolt://localhost:7687"
+    neo4j_uri: str = "neo4j://127.0.0.1:7687"
     neo4j_user: str = "neo4j"
     neo4j_password: str = "12345678"
-
+    neo4j_database_name: str = "rag-document"
     ############### Api Url ###################
     embedding_api_base: str = "http://127.0.0.1:2010"
     embedding_api_path: str = "/embeddings"
