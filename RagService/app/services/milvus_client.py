@@ -107,6 +107,7 @@ def search_relevant_chunks(
         entity = hit.entity
         hits.append({
             "chunk_id": entity.get("chunk_id"),
+            "project_id":entity.get("project_id"),
             "doc_id": entity.get("doc_id"),
             "section_title": entity.get("section_title"),
             "content": entity.get("content"),
