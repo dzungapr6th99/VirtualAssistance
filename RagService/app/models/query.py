@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 class SearchRequest(BaseModel):
-    project_id: str = "default"
+    project_id: str = ""
     query: str
     top_k: int = 5
 

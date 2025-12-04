@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        extra="ignore",  # hoặc "allow" nếu bạn thích
+        extra="ignore", 
     )
 
     app_name: str = "AI Agent RAG Service for Robot"

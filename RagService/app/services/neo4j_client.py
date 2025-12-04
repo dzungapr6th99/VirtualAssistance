@@ -41,18 +41,5 @@ def _write_graph_tx(tx, project_id:str, file_name:str, doc_id:str, chunks: List[
             title=section_title
         )
 
-        for c in section_chunks:
-            tx.run(
-                """
-                    MATCH (s:Section {doc_id: $doc_id, title: $title})
-                    MERGE (ch:Chunk {chunk_id: $chunk_id})
-                      ON CREATE SET ch.preview = $preview
-                   MERGE (s)-[:HAS_CHUNK]->(ch)            
-                """,
-                doc_id = doc_id,
-                title = section_title,
-                chunk_id = c.chunk_id,
-                preview = c.content[:200]
-                )
-
+        
     

@@ -90,7 +90,7 @@ def search_relevant_chunks(
     }
 
     expr = ""
-    if (project_id):
+    if (project_id and project_id != ""):
         expr = f'project_id == "{project_id}"'
     results = _collection.search(
         data = [embedding],
