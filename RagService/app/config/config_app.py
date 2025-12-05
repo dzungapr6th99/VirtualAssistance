@@ -22,11 +22,11 @@ class Settings(BaseSettings):
     app_name: str = "AI Agent RAG Service for Robot"
     
     ############### Milvus Configuration ###############
-    milvus_host: str = "127.0.0.1"                # không cần http:// ở đây
+    milvus_host: str = "127.0.0.1"                # Don't need http here
     milvus_port: str = "19530"
     milvus_db_name: str = "default"
     milvus_collection: str = "robot_document"
-
+    milvus_score_threshold: float = 0.55
     ############### Neo4j Configuration ###############
     neo4j_uri: str = "neo4j://127.0.0.1:7687"
     neo4j_user: str = "neo4j"

@@ -8,7 +8,7 @@ from app.models.ollama_stream import OllamaStreamMessage, OllamaStreamChunk
 from app.models.ask import AskRequest
 from app.services.qa_engine import QaEngine
 from app.dependencies import get_project_catalog, get_qa_engine
-from config.config_app import settings
+from app.config.config_app import settings
 router = APIRouter(prefix= "/api", tags=["ollama-chat"])
 
 @router.post("/chat", response_model=OllamaChatResponse)
@@ -45,7 +45,7 @@ async def ollama_chat(
             raise HTTPException(status_code=400, detail="No user message found")
         question = user_msgs[-1].content
         system_prompt, user_prompt = await engine.build_prompt_only(question)
-        backend_url = settings.base_url
+        backend_url = settings.ollama_base_url
         payload = {
             "model": req.model,
             "stream": True,

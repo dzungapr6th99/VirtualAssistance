@@ -1,6 +1,6 @@
 from typing import List
 from textwrap import dedent
-from models.projects import ProjectMeta
+from app.models.projects import ProjectMeta
 from .rag_client import RagClient
 
 class ProjectCatalog:

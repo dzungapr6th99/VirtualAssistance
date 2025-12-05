@@ -3,6 +3,7 @@ from app.models.query import SearchHit, SearchRequest, SearchResponse, HybridSea
 from app.services.embedding_service import get_embeddings
 from app.services.milvus_client import search_relevant_chunks
 from app.services.neo4j_client import expand_related
+from app.config.config_app import settings
 router = APIRouter(prefix= "/api/query", tags= ["search"])
 
 @router.post("vector-search", response_model= SearchResponse)
@@ -45,6 +46,7 @@ async def hybrid_search(request: SearchRequest) -> HybridSearchResponse:
             top_k= request.top_k,
             project_id= request.project_id
         )
+        vector_chunks = [item for item in vector_chunks if item > settings.milvus_score_threshold]
     except Exception as ex:
         raise HTTPException(status_code=500, detail = f"Milvus search vector error: {ex}")
     
@@ -58,6 +60,7 @@ async def hybrid_search(request: SearchRequest) -> HybridSearchResponse:
             HybridSearchItem(
                 chunk_id=c.get("chunk_id"),
                 project_id=c.get("project_id"),
+                file_name= "",
                 section_title=c.get("section_title"),
                 content=c.get("content"),
                 score=float(c.get("score")),
@@ -67,9 +70,12 @@ async def hybrid_search(request: SearchRequest) -> HybridSearchResponse:
     for c in graph_chunks:
         all_items.append(
             HybridSearchItem(
+                chunk_id= c.get("chunk_id"),
                 project_id=c.get("project_id"),
+                file_name= "",
                 section_title=c.get("section_title"),
                 content=c.get("content"),
+                score=0,
                 source="graph",
             )
         )
@@ -77,4 +83,4 @@ async def hybrid_search(request: SearchRequest) -> HybridSearchResponse:
     all_items.sort(key=lambda x: x.score, reverse=True)
     top_items = all_items[: request.top_k]
 
-    return SearchResponse(results=top_items)
+    return HybridSearchResponse(results=top_items)

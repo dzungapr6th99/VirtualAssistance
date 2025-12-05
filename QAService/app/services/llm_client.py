@@ -9,7 +9,7 @@ class LlmClient:
             api_key: Optional[str]= None,
             model: Optional[str]= None,
     ):
-        self.base_url = (base_url or settings.base_url)
+        self.base_url = (base_url or settings.ollama_base_url)
         self.api_key = (api_key or settings.api_key)
         self.model = model or settings.model
 

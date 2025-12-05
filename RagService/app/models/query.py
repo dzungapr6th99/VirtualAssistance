@@ -17,13 +17,13 @@ class SearchResponse(BaseModel):
     hits: List[SearchHit]
     
 class HybridSearchItem(BaseModel):
-    chunk_id: str
+    chunk_id: Optional[str] = None
     project_id: Optional[str] = None
-    file_name:str
+    file_name: Optional[str] = None
     section_title: Optional[str] = None
-    content: str
-    score: float
-    source: str
+    content:  Optional[str] = None
+    score:  Optional[float] = None 
+    source:  Optional[str] = None
     
 class HybridSearchResponse(BaseModel):
-    result: List[HybridSearchItem]
+    results: List[HybridSearchItem]

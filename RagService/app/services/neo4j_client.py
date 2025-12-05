@@ -33,7 +33,7 @@ def _write_graph_tx(tx, project_id:str, file_name:str, doc_id:str, chunks: List[
     for c in chunks:
         section_map.setdefault(c.section_title, []).append(c)
 
-    for section_title in section_map.items():
+    for section_title, section_chunks in section_map.items():
         tx.run(
             """
             MATCH (p:Project {project_id: $project_id})-[:HAS_DOCUMENT]->(d:Document {doc_id: $doc_id})
@@ -44,6 +44,21 @@ def _write_graph_tx(tx, project_id:str, file_name:str, doc_id:str, chunks: List[
             doc_id = doc_id,
             title=section_title
         )
+
+        for c in section_chunks:
+            tx.run(
+                """
+                    MATCH (s:Section {doc_id: $doc_id, title: $title})
+                    MERGE (ch:Chunk {chunk_id: $chunk_id})
+                      ON CREATE SET ch.preview = $preview
+                   MERGE (s)-[:HAS_CHUNK]->(ch)            
+                """,
+                doc_id = doc_id,
+                title = section_title,
+                chunk_id = c.chunk_id,
+                preview = c.content[:200]
+                )
+
 
 def _query_graph_tx(tx, project_id: str, doc_id: Optional[str] = None, limit: int=50)-> List[Dict]:
     if doc_id:

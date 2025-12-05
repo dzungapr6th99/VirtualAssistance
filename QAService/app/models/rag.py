@@ -13,7 +13,6 @@ class RagSearchResultItem(BaseModel):
     score: float
     #optional data
     project_id: Optional[str] = None
-    project_name: Optional[str] = None
     section_title: Optional[str] = None
 
 class RagSearchResponse(BaseModel):

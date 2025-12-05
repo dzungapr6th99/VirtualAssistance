@@ -5,10 +5,10 @@ from app.services.llm_client import LlmClient
 from app.services.project_catalog import ProjectCatalog
 from app.services.project_router import ProjectRouter
 from app.services.qa_engine import QaEngine
-from config.config_app import settings
+from app.config.config_app import settings
 @lru_cache 
 def get_rag_client() -> RagClient:
-    return RagClient(base_url=settings.base_url)
+    return RagClient(base_url=settings.ollama_base_url)
 
 @lru_cache 
 def get_llm_client() -> LlmClient:

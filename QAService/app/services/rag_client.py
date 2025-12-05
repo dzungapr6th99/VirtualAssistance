@@ -1,7 +1,7 @@
 import httpx
 from typing import List, Optional
-from models.rag import RagSearchRequest, RagSearchResponse, RagSearchResultItem
-from models.projects import ProjectListResponse, ProjectMeta, ProjectSearchItem, ProjectSearchRequest, ProjectSearchResponse
+from app.models.rag import RagSearchRequest, RagSearchResponse, RagSearchResultItem
+from app.models.projects import ProjectListResponse, ProjectMeta, ProjectSearchItem, ProjectSearchRequest, ProjectSearchResponse
 
 class RagClient:
     def __init__(self, base_url:str):
